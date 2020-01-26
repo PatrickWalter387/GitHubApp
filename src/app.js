@@ -20,7 +20,7 @@ class App extends Component{
 
                     <ul className="repos-info">
                         <li>Repositorios: 277</li>
-                        <li>Seguidores: 65</li>
+                        <li>Seguidores: 64</li>
                         <li>Seguindo: 102</li>
                     </ul>
 
