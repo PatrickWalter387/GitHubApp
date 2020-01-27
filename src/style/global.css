@@ -53,19 +53,19 @@
     grid-column-gap: 20px;
 }
 
-.lists ul{
+.repos ul, .starred ul{
     list-style: none;
     display: inline;
 }
 
-.lists ul li{
+.repos ul li, .starred ul li{
      margin-bottom: 20px;
 }
 
-.lists h2{
+.repos h2, .starred h2{
     margin-bottom: 10px;
 }
 
-.starred{
+.repos, .starred{
     margin-top: 50px;
 }
