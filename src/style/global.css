@@ -63,7 +63,7 @@
 }
 
 .repos h2, .starred h2{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .repos, .starred{

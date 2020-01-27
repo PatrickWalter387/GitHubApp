@@ -14,8 +14,24 @@ class App extends Component{
                 <Search/>
                 <UserInfo/>
                 <Actions/>
-                <Repositories className="repos" title="Repositorios:"/>
-                <Repositories className="starred" title="Favoritos:"/>
+                
+                <Repositories 
+                  className="repos" 
+                  title="Repositorios:" 
+                  repos={[
+                      { name: "Nome do Repositorio:", link: "#" },
+                      { name: "Nome do Repositorio:", link: "#" }
+                  ]}
+                />
+
+                <Repositories 
+                  className="starred" 
+                  title="Favoritos:"
+                  repos={[
+                      { name: "Nome do Repositorio:", link: "#" },
+                      { name: "Nome do Repositorio:", link: "#" }
+                  ]}
+                />
             </div>
         );
     } 

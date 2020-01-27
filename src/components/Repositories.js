@@ -1,14 +1,31 @@
 import React from "react";
 
-const Repositories = ({className, title}) => (
+const Repositories = ({className, title, repos}) => (
     <div className={className}>
         <h2>{title}</h2>
         <ul>
-            <li><a href="#">Nome do repositorio:</a></li>
-            <li><a href="#">Nome do repositorio:</a></li>
+            {
+                repos.map((repo, index) => (
+                    <li key={index}>
+                        <a href={repo.link}>
+                            {repo.name}
+                        </a>
+                    </li>
+                ))
+            }
         </ul>
     </div>
 );
+
+Repositories.defaultProps = {
+    className: ""
+}
+
+Repositories.propTypes = {
+    className: React.PropTypes.string,
+    title: React.PropTypes.string.isRequired,
+    repos: React.PropTypes.array
+}
 
 export default Repositories;
 
