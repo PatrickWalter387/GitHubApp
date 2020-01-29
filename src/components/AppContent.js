@@ -4,30 +4,36 @@ import Actions from "./Actions";
 import Repositories from "./Repositories";
 import Search from "./Search";
 
-const AppContent = () => (
+const AppContent = ({repos, userInfo, starred}) => (
     <div className="app">
         <Search/>
-        <UserInfo/>
-        <Actions/>
+        {!!userInfo && <UserInfo userInfo={userInfo}/>}
+        {!!userInfo && <Actions/>}
                 
-        <Repositories 
-          className="repos" 
-          title="Repositorios:" 
-          repos={[
-            { name: "Nome do Repositorio:", link: "#" },
-            { name: "Nome do Repositorio:", link: "#" }
-          ]}
-        />
+        {!!repos.length && 
+            <Repositories 
+                className="repos" 
+                title="Repositorios:" 
+                repos={repos}
+            />
+        }
 
-        <Repositories 
-          className="starred" 
-          title="Favoritos:"
-          repos={[
-            { name: "Nome do Repositorio:", link: "#" },
-            { name: "Nome do Repositorio:", link: "#" }
-          ]}
-        />
+        {!!starred.length &&
+            <Repositories 
+                className="starred" 
+                title="Favoritos:"
+                repos={starred}
+            />
+        }
+
+        {!!userInfo || <h2>Usuario nao encontrado.</h2>}
     </div>
 )
+
+AppContent.propTypes = {
+    userInfo: React.PropTypes.object.isRequired,
+    repos: React.PropTypes.array.isRequired,
+    starred: React.PropTypes.array.isRequired
+}
 
 export default AppContent;
