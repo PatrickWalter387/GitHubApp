@@ -1,38 +1,19 @@
 "use strict"
 
 import React, {Component} from "react";
-import Search from "./components/Search";
-import UserInfo from "./components/UserInfo";
-import Actions from "./components/Actions";
-import Repositories from "./components/Repositories";
+import AppContent from "./components/AppContent";
+
 
 class App extends Component{
-    
+    constructor(){
+        super();
+        this.state = {};
+    }
+
+
     render(){
         return(
-            <div className="app">
-                <Search/>
-                <UserInfo/>
-                <Actions/>
-                
-                <Repositories 
-                  className="repos" 
-                  title="Repositorios:" 
-                  repos={[
-                      { name: "Nome do Repositorio:", link: "#" },
-                      { name: "Nome do Repositorio:", link: "#" }
-                  ]}
-                />
-
-                <Repositories 
-                  className="starred" 
-                  title="Favoritos:"
-                  repos={[
-                      { name: "Nome do Repositorio:", link: "#" },
-                      { name: "Nome do Repositorio:", link: "#" }
-                  ]}
-                />
-            </div>
+            <AppContent/>
         );
     } 
         
