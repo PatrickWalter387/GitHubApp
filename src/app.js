@@ -14,10 +14,7 @@ class App extends Component{
         
             repos: [],
 
-            starred: [
-                { name: "Nome do Repositorio:", link: "#" },
-                { name: "Nome do Repositorio:", link: "#" }
-            ]
+            starred: []
         };
     }
 
@@ -37,28 +34,29 @@ class App extends Component{
     setRepos(responseRepos, responseStarred){
         responseRepos.map(repo => this.setState({
             repos: [ 
-                this.state.repos, 
+                ...this.state.repos, 
                 { name: repo.name, link: repo.html_url } 
             ]
         }));
 
-        console.log("OI" + this.state.repos)
+        responseStarred.map(repo => this.setState({
+            starred: [ 
+                ...this.state.starred, 
+                { name: repo.name, link: repo.html_url } 
+            ]
+        }));
           
     }
 
-    searchRepos({repos_url, starred_url}){
+    searchRepos(url){
         let responseRepos = null;
         let responseStarred = null;
 
-        console.log("Legal");
-        
-        ajax().get(repos_url).then(response =>{
+        ajax().get(`${url}/repos`).then(response =>{
             responseRepos = response;
-            console.log("Legal");
-            
-            ajax().get(starred_url).then(response =>{
+
+            ajax().get(`${url}/starred`).then(response =>{
                 responseStarred = response;
-                console.log("Legal");
                 this.setRepos(responseRepos, responseStarred);
             });
         });
@@ -74,7 +72,7 @@ class App extends Component{
                 .then(result => {
                     console.log(result);
                     this.setData(result);
-                    this.searchRepos(result);
+                    this.searchRepos(result.url);
                 });
         }
     }
