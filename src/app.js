@@ -14,7 +14,9 @@ class App extends Component{
         
             repos: [],
 
-            starred: []
+            starred: [],
+
+            urlPerfil: ""
         };
     }
 
@@ -48,6 +50,7 @@ class App extends Component{
           
     }
 
+    //handleRepos
     searchRepos(url){
         let responseRepos = null;
         let responseStarred = null;
@@ -57,6 +60,7 @@ class App extends Component{
 
             ajax().get(`${url}/starred`).then(response =>{
                 responseStarred = response;
+
                 this.setRepos(responseRepos, responseStarred);
             });
         });
@@ -72,7 +76,8 @@ class App extends Component{
                 .then(result => {
                     console.log(result);
                     this.setData(result);
-                    this.searchRepos(result.url);
+                    this.setState({ urlPerfil: result.url });
+                    //.searchRepos(result.url);
                 });
         }
     }
@@ -86,6 +91,12 @@ class App extends Component{
                 userInfo={this.state.userInfo}
                 starred={this.state.starred}
                 handleSearch={(e) => this.handleSearch(e)}
+                handleRepos={ () => {
+                    console.log("LEGAL : " + this.state.urlPerfil);
+                    this.searchRepos(this.state.urlPerfil);
+                } }
+                    
+                    
             />
         );
     } 
