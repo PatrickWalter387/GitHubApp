@@ -4,7 +4,6 @@ import React, {Component} from "react";
 import AppContent from "./components/AppContent";
 import ajax from "@fdaciuk/ajax";
 
-
 class App extends Component{
     constructor(){
         super();
@@ -14,9 +13,7 @@ class App extends Component{
         
             repos: [],
 
-            starred: [],
-
-            urlPerfil: ""
+            starred: []
         };
     }
 
@@ -33,38 +30,16 @@ class App extends Component{
         });
     }
 
-    setRepos(responseRepos, responseStarred){
-        responseRepos.map(repo => this.setState({
-            repos: [ 
-                ...this.state.repos, 
-                { name: repo.name, link: repo.html_url } 
-            ]
-        }));
-
-        responseStarred.map(repo => this.setState({
-            starred: [ 
-                ...this.state.starred, 
-                { name: repo.name, link: repo.html_url } 
-            ]
-        }));
-          
-    }
-
     //handleRepos
-    searchRepos(url){
-        let responseRepos = null;
-        let responseStarred = null;
-
-        ajax().get(`${url}/repos`).then(response =>{
-            responseRepos = response;
-
-            ajax().get(`${url}/starred`).then(response =>{
-                responseStarred = response;
-
-                this.setRepos(responseRepos, responseStarred);
-            });
-        });
-        
+    searchRepos(type){
+        ajax().get(`https://api.github.com/users/${this.state.userInfo.login}/${type}`)
+            .then(response =>{
+                this.setState({
+                    [type]: response.map(repo => (
+                        { name: repo.name, link: repo.html_url }
+                    ))
+                });
+            });       
     }
 
     handleSearch(e){
@@ -76,14 +51,10 @@ class App extends Component{
                 .then(result => {
                     console.log(result);
                     this.setData(result);
-                    this.setState({ urlPerfil: result.url });
-                    //.searchRepos(result.url);
                 });
         }
     }
-
     
-
     render(){
         return(
             <AppContent 
@@ -91,16 +62,17 @@ class App extends Component{
                 userInfo={this.state.userInfo}
                 starred={this.state.starred}
                 handleSearch={(e) => this.handleSearch(e)}
-                handleRepos={ () => {
-                    console.log("LEGAL : " + this.state.urlPerfil);
-                    this.searchRepos(this.state.urlPerfil);
+                
+                getRepos={ () => {
+                    this.searchRepos("repos");
                 } }
-                    
-                    
+
+                getStarred={ () => {
+                    this.searchRepos("starred");
+                } }        
             />
         );
     } 
-        
 }
 
 export default App;

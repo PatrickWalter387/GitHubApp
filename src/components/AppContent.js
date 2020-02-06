@@ -4,14 +4,15 @@ import Actions from "./Actions";
 import Repositories from "./Repositories";
 import Search from "./Search";
 
-const AppContent = ({repos, userInfo, starred, handleSearch, handleRepos}) => (
+const AppContent = ({repos, userInfo, starred, handleSearch, getRepos, getStarred}) => (
     <div className="app">
         <Search handleSearch={handleSearch}/>
         {!!userInfo && <UserInfo userInfo={userInfo}/>}
 
         {!!userInfo && 
             <Actions 
-                handleRepos={handleRepos}
+                getRepos={getRepos}
+                getStarred={getStarred}
             />
         }
                 
@@ -36,9 +37,12 @@ const AppContent = ({repos, userInfo, starred, handleSearch, handleRepos}) => (
 )
 
 AppContent.propTypes = {
-    userInfo: React.PropTypes.object.isRequired,
+    userInfo: React.PropTypes.object,
     repos: React.PropTypes.array.isRequired,
-    starred: React.PropTypes.array.isRequired
+    starred: React.PropTypes.array.isRequired,
+    handleSearch: React.PropTypes.func.isRequired,
+    getRepos: React.PropTypes.func.isRequired,
+    getStarred: React.PropTypes.func.isRequired 
 }
 
 export default AppContent;
