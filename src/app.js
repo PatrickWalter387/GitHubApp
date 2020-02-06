@@ -26,7 +26,11 @@ class App extends Component{
                 repositories: public_repos,
                 following,
                 followers
-            }
+            },
+            
+            repos: [],
+
+            starred: []
         });
     }
 
