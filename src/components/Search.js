@@ -1,9 +1,10 @@
 import React from "react";
 import ajax from "@fdaciuk/ajax";
 
-const Search = ({handleSearch}) => (
+const Search = ({handleSearch, isDisabled}) => (
     <div className="search">
-        <input 
+        <input
+            disabled={isDisabled}
             type="search" 
             placeholder="Digite o nome do usuario"
             onKeyUp={handleSearch}

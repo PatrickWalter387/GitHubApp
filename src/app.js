@@ -13,7 +13,9 @@ class App extends Component{
         
             repos: [],
 
-            starred: []
+            starred: [],
+
+            isFetching: false
         };
     }
 
@@ -51,10 +53,15 @@ class App extends Component{
         const keyCode = e.which || e.keyCode;
 
         if(keyCode === ENTER){
+            this.setState({ isFetching: true });
+
             ajax().get(`https://api.github.com/users/${e.target.value}`)
                 .then(result => {
                     console.log(result);
                     this.setData(result);
+                })
+                .always(() => {
+                    this.setState({ isFetching: false });
                 });
         }
     }
@@ -65,6 +72,8 @@ class App extends Component{
                 repos={this.state.repos} 
                 userInfo={this.state.userInfo}
                 starred={this.state.starred}
+                isFetching={this.state.isFetching}
+                
                 handleSearch={(e) => this.handleSearch(e)}
                 
                 getRepos={ () => {

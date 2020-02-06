@@ -4,9 +4,10 @@ import Actions from "./Actions";
 import Repositories from "./Repositories";
 import Search from "./Search";
 
-const AppContent = ({repos, userInfo, starred, handleSearch, getRepos, getStarred}) => (
+const AppContent = ({repos, userInfo, starred, handleSearch, getRepos, getStarred, isFetching}) => (
     <div className="app">
-        <Search handleSearch={handleSearch}/>
+        <Search handleSearch={handleSearch} isDisabled={isFetching}/>
+
         {!!userInfo && <UserInfo userInfo={userInfo}/>}
 
         {!!userInfo && 
