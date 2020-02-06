@@ -54,10 +54,10 @@ class App extends Component{
 
         if(keyCode === ENTER){
             this.setState({ isFetching: true });
+            this.setState({ userInfo: null});
 
             ajax().get(`https://api.github.com/users/${e.target.value}`)
                 .then(result => {
-                    console.log(result);
                     this.setData(result);
                 })
                 .always(() => {

@@ -33,7 +33,8 @@ const AppContent = ({repos, userInfo, starred, handleSearch, getRepos, getStarre
             />
         }
 
-        {!!userInfo || <h2>Usuario nao encontrado.</h2>}
+        {isFetching && <p>Carregando...</p>}
+        {!!userInfo || isFetching || <h2>Usuario nao encontrado.</h2>}
     </div>
 )
 
@@ -43,7 +44,8 @@ AppContent.propTypes = {
     starred: React.PropTypes.array.isRequired,
     handleSearch: React.PropTypes.func.isRequired,
     getRepos: React.PropTypes.func.isRequired,
-    getStarred: React.PropTypes.func.isRequired 
+    getStarred: React.PropTypes.func.isRequired,
+    isFetching: React.PropTypes.bool.isRequired 
 }
 
 export default AppContent;
