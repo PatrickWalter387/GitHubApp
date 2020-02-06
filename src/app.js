@@ -20,6 +20,11 @@ class App extends Component{
     }
 
     setData({login, name, avatar_url, followers, following, public_repos}){
+        
+        if(name === null){
+            name = login;
+        }
+
         this.setState({
             userInfo: {
                 photoUrl: avatar_url,
